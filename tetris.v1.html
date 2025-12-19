@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -45,24 +45,29 @@
     ctx.scale(blockSize, blockSize);
 
     const tetrominos = [
-      [[1, 1, 1, 1]], // I
-      [[1, 1, 1], [0, 1, 0]], // T
-      [[1, 1], [1, 1]], // O
-      [[1, 1, 0], [0, 1, 1]], // S
-      [[0, 1, 1], [1, 1, 0]], // Z
-      [[1, 0, 0], [1, 1, 1]], // L
-      [[0, 0, 1], [1, 1, 1]], // J
-    ];
+  { shape: [[1, 1, 1, 1]], color: '#00FFFF' }, // I
+  { shape: [[1, 1, 1], [0, 1, 0]], color: '#FF00FF' }, // T
+  { shape: [[1, 1], [1, 1]], color: '#FFFF00' }, // O
+  { shape: [[1, 1, 0], [0, 1, 1]], color: '#00FF00' }, // S
+  { shape: [[0, 1, 1], [1, 1, 0]], color: '#FF0000' }, // Z
+  { shape: [[1, 0, 0], [1, 1, 1]], color: '#FFA500' }, // L
+  { shape: [[0, 0, 1], [1, 1, 1]], color: '#0000FF' }, // J
+];
+    
+    function createPiece() {
+  const index = Math.floor(Math.random() * tetrominos.length);
+  const piece = tetrominos[index];
 
-    const colors = ['#00FFFF', '#FF00FF', '#FFFF00', '#00FF00', '#FF0000', '#0000FF', '#FFA500'];
+  return {
+    shape: piece.shape.map(row => row.slice()),
+    color: piece.color
+  };
+}
 
-    function createPiece(type) {
-      return tetrominos[type].map(row => row.slice());
-    }
 
     const board = Array.from({ length: rows }, () => Array(columns).fill(null));
 
-    let currentPiece = createPiece(Math.floor(Math.random() * tetrominos.length));
+    let currentPiece = createPiece();
     let currentPos = { x: 3, y: 0 };
     let gameInterval = null; // 게임 루프를 저장할 변수
 
@@ -81,21 +86,26 @@
     }
 
     function drawPiece() {
-      for (let y = 0; y < currentPiece.length; y++) {
-        for (let x = 0; x < currentPiece[y].length; x++) {
-          if (currentPiece[y][x]) {
-            ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
+      for (let y = 0; y < currentPiece.shape.length; y++) {
+        for (let x = 0; x < currentPiece.shape[y].length; x++) {
+          if (currentPiece.shape[y][x]) {
+            ctx.fillStyle = currentPiece.color;
             ctx.fillRect(currentPos.x + x, currentPos.y + y, 1, 1);
+            ctx.strokeStyle = '#000';
             ctx.strokeRect(currentPos.x + x, currentPos.y + y, 1, 1);
           }
         }
       }
     }
 
+
     function collide() {
-      for (let y = 0; y < currentPiece.length; y++) {
-        for (let x = 0; x < currentPiece[y].length; x++) {
-          if (currentPiece[y][x] && (board[currentPos.y + y] && board[currentPos.y + y][currentPos.x + x]) !== null) {
+      for (let y = 0; y < currentPiece.shape.length; y++) {
+        for (let x = 0; x < currentPiece.shape[y].length; x++) {
+          if (
+            currentPiece.shape[y][x] &&
+            (board[currentPos.y + y]?.[currentPos.x + x] !== null)
+          ) {
             return true;
           }
         }
@@ -103,17 +113,19 @@
       return false;
     }
 
+
     function placePiece() {
-      for (let y = 0; y < currentPiece.length; y++) {
-        for (let x = 0; x < currentPiece[y].length; x++) {
-          if (currentPiece[y][x]) {
-            board[currentPos.y + y][currentPos.x + x] = colors[Math.floor(Math.random() * colors.length)];
+      for (let y = 0; y < currentPiece.shape.length; y++) {
+        for (let x = 0; x < currentPiece.shape[y].length; x++) {
+          if (currentPiece.shape[y][x]) {
+            board[currentPos.y + y][currentPos.x + x] = currentPiece.color;
           }
         }
       }
       clearLines();
       resetPiece();
     }
+
 
     function clearLines() {
       for (let y = rows - 1; y >= 0; y--) {
@@ -125,13 +137,15 @@
     }
 
     function resetPiece() {
-      currentPiece = createPiece(Math.floor(Math.random() * tetrominos.length));
+      currentPiece = createPiece();
       currentPos = { x: 3, y: 0 };
+
       if (collide()) {
         alert('Game Over');
         board.forEach(row => row.fill(null));
       }
     }
+
 
     function rotate() {
       const temp = currentPiece;
