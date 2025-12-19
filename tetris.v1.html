@@ -8,20 +8,33 @@
     body {
       margin: 0;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
       background-color: #111;
+      color: #fff;
+      font-family: sans-serif;
     }
 
     canvas {
       border: 1px solid #fff;
       background-color: #000;
+      display: none; /* 버튼 누르기 전에는 숨김 */
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      margin-bottom: 20px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
+  <button id="startBtn">게임 시작</button>
   <canvas id="tetris" width="320" height="640"></canvas>
+
   <script>
     const canvas = document.getElementById('tetris');
     const ctx = canvas.getContext('2d');
@@ -29,7 +42,7 @@
     const columns = 10;
     const blockSize = 32;
 
-    ctx.scale(blockSize, blockSize); // 스케일을 설정하여 블록 크기를 설정
+    ctx.scale(blockSize, blockSize);
 
     const tetrominos = [
       [[1, 1, 1, 1]], // I
@@ -51,6 +64,7 @@
 
     let currentPiece = createPiece(Math.floor(Math.random() * tetrominos.length));
     let currentPos = { x: 3, y: 0 };
+    let gameInterval = null; // 게임 루프를 저장할 변수
 
     function drawBoard() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -114,7 +128,6 @@
       currentPiece = createPiece(Math.floor(Math.random() * tetrominos.length));
       currentPos = { x: 3, y: 0 };
       if (collide()) {
-        // 게임 오버
         alert('Game Over');
         board.forEach(row => row.fill(null));
       }
@@ -154,17 +167,24 @@
       drawBoard();
       drawPiece();
       moveDown();
-      setTimeout(gameLoop, 1000 / 2); // 게임 속도 설정
     }
 
     document.addEventListener('keydown', (e) => {
+      if (!gameInterval) return; // 게임 시작 전엔 키 입력 무시
       if (e.key === 'ArrowLeft') moveLeft();
       if (e.key === 'ArrowRight') moveRight();
       if (e.key === 'ArrowDown') moveDown();
       if (e.key === 'ArrowUp') rotate();
     });
 
-    gameLoop();
+    // 🎯 버튼 클릭 시 게임 시작
+    document.getElementById('startBtn').addEventListener('click', () => {
+      canvas.style.display = 'block'; // 캔버스 보여주기
+      document.getElementById('startBtn').style.display = 'none'; // 버튼 숨기기
+      if (!gameInterval) {
+        gameInterval = setInterval(gameLoop, 500); // 0.5초마다 게임 루프
+      }
+    });
   </script>
 </body>
 </html>
