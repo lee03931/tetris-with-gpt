@@ -1,5 +1,5 @@
-    const canvas = document.getElementById('tetris');
-    const ctx = canvas.getContext('2d');
+    const canvas = document.getElementById("tetris");
+    const ctx = canvas.getContext("2d");
     const rows = 20;
     const columns = 10;
     const blockSize = 32;
@@ -15,7 +15,13 @@
   { shape: [[1, 0, 0], [1, 1, 1]], color: '#FFA500' }, // L
   { shape: [[0, 0, 1], [1, 1, 1]], color: '#0000FF' }, // J
 ];
-    
+
+    function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawBoard();
+  drawPiece();
+}
+
     function createPiece() {
   const index = Math.floor(Math.random() * tetrominos.length);
   const piece = tetrominos[index];
@@ -25,6 +31,14 @@
     color: piece.color
   };
 }
+
+    function update() {
+  draw();
+  requestAnimationFrame(update);
+}
+
+update();
+
 
 
     const board = Array.from({ length: rows }, () => Array(columns).fill(null));
