@@ -175,3 +175,6 @@ update();
         gameInterval = setInterval(gameLoop, 500); // 0.5초마다 게임 루프
       }
     });
+
+ctx.fillStyle = "red";
+ctx.fillRect(50, 50, 50, 50);
