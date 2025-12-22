@@ -6,7 +6,7 @@ const startBtn = document.getElementById("start-btn");
 
 let gameState = "START"; // START | PLAYING | GAME_OVER
 
-startBtn.addEventListener("click", () => {
+startBtn.addEventListener("click", () => { //게임 시작 처리
   const nickname = nicknameInput.value.trim();
   if (!nickname) {
     alert("닉네임을 입력하세요");
@@ -24,7 +24,7 @@ startBtn.addEventListener("click", () => {
 const nicknameInput = document.getElementById("nickname-input");
 const rankingList = document.getElementById("ranking-list");
 
-function loadRanking() {
+function loadRanking() { //랭킹 불러오기
   const ranking = JSON.parse(localStorage.getItem("ranking")) || [];
   rankingList.innerHTML = "";
 
@@ -35,11 +35,27 @@ function loadRanking() {
   });
 }
 
-const savedNickname = localStorage.getItem("nickname");
+const savedNickname = localStorage.getItem("nickname"); //닉네임 자동로드
 if (savedNickname) {
   nicknameInput.value = savedNickname;
 }
 
+function saveScore(score) { //점수 저장
+  const nickname = localStorage.getItem("nickname");
+  if (!nickname) return;
+
+  const ranking = JSON.parse(localStorage.getItem("ranking")) || [];
+
+  ranking.push({ name: nickname, score });
+  ranking.sort((a, b) => b.score - a.score);
+
+  const top10 = ranking.slice(0, 10);
+  localStorage.setItem("ranking", JSON.stringify(top10));
+}
+
+saveScore(currentScore);
+loadRanking();
+startScreen.style.display = "flex";
 
 function startGame() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
