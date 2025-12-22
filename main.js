@@ -65,3 +65,23 @@ function startGame() {
   ctx.font = "20px Arial";
   ctx.fillText("Game Started", 60, 300);
 }
+
+function injectTestRanking() { //테스트용 코드
+  const testRanking = [
+    { name: "하나", score: 10 },
+    { name: "둘", score: 9 },
+    { name: "셋", score: 8 },
+    { name: "넷", score: 7 },
+    { name: "다섯", score: 6 },
+    { name: "여섯", score: 5 },
+    { name: "일곱", score: 4 },
+    { name: "여덟", score: 3 },
+    { name: "아홉", score: 2 },
+    { name: "열", score: 1 },
+  ];
+
+  localStorage.setItem("ranking", JSON.stringify(testRanking));
+}
+
+injectTestRanking();
+loadRanking();
