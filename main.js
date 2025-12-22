@@ -23,6 +23,7 @@ startBtn.addEventListener("click", () => { //게임 시작 처리
 
 const nicknameInput = document.getElementById("nickname-input");
 const rankingList = document.getElementById("ranking-list");
+console.log("rankingList:", rankingList);
 
 function loadRanking() { //랭킹 불러오기
   console.log("loadRanking 실행됨");
