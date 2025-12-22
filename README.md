@@ -1,14 +1,15 @@
-# 🧱 Tetris (Offline Web Game)
+# 🧱 Tetris (Offline Web Game)(gpt사용)
 
-브라우저에서 실행되는 **오프라인 지원 웹 테트리스 게임**입니다.  
+브라우저에서 실행되는 오프라인 지원 웹 테트리스 게임입니다.  
 HTML, CSS, JavaScript만 사용하여 구현하며, 별도의 서버나 빌드 과정 없이 동작합니다.
 
 ---
 
 ## 🎮 특징
 
+- ✅ gpt를 사용해서 만들었음
 - ✅ 브라우저 기반 웹 게임
-- ✅ **오프라인에서도 실행 가능** (Service Worker 사용)
+- ✅ 오프라인에서도 실행 가능 (Service Worker 사용)
 - ✅ Canvas 기반 렌더링
 - ✅ 키보드 조작
 - ✅ GitHub Pages 배포 가능
