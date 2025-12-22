@@ -1,3 +1,7 @@
+const nicknameInput = document.getElementById("nickname-input");
+const rankingList = document.getElementById("ranking-list");
+console.log("rankingList:", rankingList);
+
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
@@ -19,11 +23,6 @@ startBtn.addEventListener("click", () => { //게임 시작 처리
   gameState = "PLAYING";
   startGame();
 });
-
-
-const nicknameInput = document.getElementById("nickname-input");
-const rankingList = document.getElementById("ranking-list");
-console.log("rankingList:", rankingList);
 
 function loadRanking() { //랭킹 불러오기
   console.log("loadRanking 실행됨");
