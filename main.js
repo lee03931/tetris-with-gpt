@@ -25,6 +25,8 @@ const nicknameInput = document.getElementById("nickname-input");
 const rankingList = document.getElementById("ranking-list");
 
 function loadRanking() { //랭킹 불러오기
+  console.log("loadRanking 실행됨");
+
   const ranking = JSON.parse(localStorage.getItem("ranking")) || [];
   rankingList.innerHTML = "";
 
@@ -34,6 +36,7 @@ function loadRanking() { //랭킹 불러오기
     rankingList.appendChild(li);
   });
 }
+
 
 const savedNickname = localStorage.getItem("nickname"); //닉네임 자동로드
 if (savedNickname) {
