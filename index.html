@@ -1,0 +1,17 @@
+<body>
+  <h1>Tetris</h1>
+
+  <div id="start-screen">
+    <button id="start-btn">START</button>
+  </div>
+
+  <canvas id="game" width="300" height="600"></canvas>
+
+  <script src="main.js"></script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js');
+    }
+  </script>
+</body>
