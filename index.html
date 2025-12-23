@@ -1,1 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ===============================
+       PWA / 오프라인 대응 설정
+       =============================== -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#111111" />
+
+  <title>Tetris</title>
+
+  <!-- ===============================
+       스타일 연결
+       =============================== -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- ===============================
+       게임 전체 컨테이너
+       =============================== -->
+  <div id="game-container">
+    <h1>TETRIS</h1>
+
+    <!-- 
+      메인 게임 캔버스
+      - 실제 테트리스 보드가 그려지는 영역
+    -->
+    <canvas
+      id="tetris-canvas"
+      width="300"
+      height="600"
+    ></canvas>
+
+    <!-- 점수, 상태 UI (추후 확장용) -->
+    <div id="game-info">
+      <p>Score: <span id="score">0</span></p>
+    </div>
+  </div>
+
+  <!-- ===============================
+       JavaScript 파일 로드
+       (의존성 순서 중요)
+       =============================== -->
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/board.js"></script>
+  <script src="js/tetromino.js"></script>
+  <script src="js/collision.js"></script>
+  <script src="js/input.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/main.js"></script>
+
+  <!-- ===============================
+       Service Worker 등록
+       GitHub Pages + 오프라인 대응
+       =============================== -->
+  <script>
+    // 브라우저가 Service Worker를 지원하는지 확인
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker
+          .register("service-worker.js")
+          .then(() => {
+            console.log("Service Worker registered");
+          })
+          .catch((error) => {
+            console.error("Service Worker registration failed:", error);
+          });
+      });
+    }
+  </script>
+</body>
+</html>
 
