@@ -64,7 +64,8 @@ function render() {
   ctx.fillStyle = "#000";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // 실제 보드/블록 렌더링은 render.js에서 처리 예정
+  // 보드 렌더링
+  drawBoard(ctx);
 }
 
 
