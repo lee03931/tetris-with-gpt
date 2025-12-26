@@ -53,3 +53,18 @@ function drawBoard(ctx) {
   }
 }
 
+/* ===============================
+   테트로미노 렌더링
+   =============================== */
+function drawCurrentTetromino(ctx) {
+  const piece = getCurrentPiece();
+  if (!piece) return;
+
+  piece.shape.forEach((row, y) => {
+    row.forEach((value, x) => {
+      if (value !== 0) {
+        drawCell(ctx, piece.x + x, piece.y + y, value);
+      }
+    });
+  });
+}
