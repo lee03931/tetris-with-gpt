@@ -91,3 +91,6 @@ function getBoard() {
   return board;
 }
 
+board[19][4] = 1;
+board[18][5] = 2;
+board[17][6] = 3;
