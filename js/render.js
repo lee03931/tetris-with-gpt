@@ -54,17 +54,27 @@ function drawBoard(ctx) {
 }
 
 /* ===============================
-   테트로미노 렌더링
+   테트로미노 그리기
    =============================== */
-function drawCurrentTetromino(ctx) {
-  const piece = getCurrentPiece();
-  if (!piece) return;
 
-  piece.shape.forEach((row, y) => {
-    row.forEach((value, x) => {
-      if (value !== 0) {
-        drawCell(ctx, piece.x + x, piece.y + y, value);
-      }
-    });
-  });
+/**
+ * 현재 테트로미노를 canvas에 렌더링한다.
+ * @param {CanvasRenderingContext2D} ctx
+ * @param {Object} tetromino
+ */
+function drawTetromino(ctx, tetromino) {
+  const { matrix, x: offsetX, y: offsetY, value } = tetromino;
+
+  // 테트로미노 행렬 순회
+  for (let row = 0; row < matrix.length; row++) {
+    for (let col = 0; col < matrix[row].length; col++) {
+      if (matrix[row][col] === 0) continue;
+
+      const x = (offsetX + col) * BLOCK_SIZE;
+      const y = (offsetY + row) * BLOCK_SIZE;
+
+      drawCell(ctx, x, y, value);
+    }
+  }
 }
+
