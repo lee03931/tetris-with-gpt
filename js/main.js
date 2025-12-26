@@ -81,6 +81,9 @@ function render() {
 
   // 보드 렌더링
   drawBoard(ctx);
+
+  // 현재 테트로미노 렌더링
+  drawTetromino(ctx, currentTetromino);
 }
 
 
