@@ -66,6 +66,30 @@ function update(deltaTime) {
   dropCounter += deltaTime;
 }
 
+/* ===============================
+   테트로미노 렌더링
+   =============================== */
+
+/**
+ * 현재 테트로미노를 canvas에 그린다
+ * @param {CanvasRenderingContext2D} ctx
+ */
+function drawCurrentTetromino(ctx) {
+  const { matrix, x, y } = currentTetromino;
+
+  for (let row = 0; row < matrix.length; row++) {
+    for (let col = 0; col < matrix[row].length; col++) {
+      const value = matrix[row][col];
+      if (value === 0) continue;
+
+      // 테트로미노 좌표를 보드 좌표로 변환
+      const drawX = (x + col) * BLOCK_SIZE;
+      const drawY = (y + row) * BLOCK_SIZE;
+
+      drawCell(ctx, drawX, drawY, value);
+    }
+  }
+}
 
 /* ===============================
    화면 렌더링
