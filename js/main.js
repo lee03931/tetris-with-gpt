@@ -40,15 +40,20 @@ let dropCounter = 0;
 /**
  * 게임 초기 진입 함수
  * - 캔버스 기본 상태 설정
+ * - 테트로미노 초기 생성
  * - 메인 게임 루프 시작
  */
 function init() {
   // 캔버스 초기 상태 설정
   ctx.scale(1, 1); // 추후 해상도 대응 시 수정 가능
 
+  // 최초 테트로미노 생성
+  currentTetromino = createTetromino();
+
   // 게임 루프 시작
   requestAnimationFrame(gameLoop);
 }
+
 
 
 /* ===============================
@@ -67,11 +72,15 @@ function update(deltaTime) {
 }
 
 /* ===============================
-   테트로미노 렌더링
+   테트로미노 상태 관리
    =============================== */
 
-//현재 나타나 있는 테트로미노
-let currentTetromino;
+// 현재 조작 중인 테트로미노 객체
+let currentTetromino = null;
+
+/* ===============================
+   테트로미노 렌더링
+   =============================== */
 
 /**
  * 현재 테트로미노를 canvas에 그린다
@@ -97,10 +106,6 @@ function drawCurrentTetromino(ctx) {
 /* ===============================
    화면 렌더링
    =============================== */
-
-/**
- * 현재 프레임의 화면을 렌더링한다.
- */
 function render() {
   // 화면 초기화
   ctx.fillStyle = "#000";
@@ -110,9 +115,10 @@ function render() {
   drawBoard(ctx);
 
   // 현재 테트로미노 렌더링
-  drawTetromino(ctx, currentTetromino);
+  if (currentTetromino) {
+    drawTetromino(ctx, currentTetromino);
+  }
 }
-
 
 /* ===============================
    메인 게임 루프
