@@ -111,13 +111,11 @@ function render() {
   ctx.fillStyle = "#000";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // 보드 렌더링
+  // 고정된 보드 렌더링
   drawBoard(ctx);
 
   // 현재 테트로미노 렌더링
-  if (currentTetromino) {
-    drawTetromino(ctx, currentTetromino);
-  }
+  renderTetromino(ctx, currentTetromino);
 }
 
 /* ===============================
