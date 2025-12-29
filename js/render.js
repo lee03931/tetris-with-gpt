@@ -78,3 +78,30 @@ function drawTetromino(ctx, tetromino) {
   }
 }
 
+/* ===============================
+   테트로미노 렌더링
+   =============================== */
+
+/**
+ * 현재 테트로미노를 canvas에 렌더링한다.
+ * @param {CanvasRenderingContext2D} ctx
+ * @param {Object} tetromino
+ */
+function renderTetromino(ctx, tetromino) {
+  const { matrix, x: offsetX, y: offsetY } = tetromino;
+
+  for (let row = 0; row < matrix.length; row++) {
+    for (let col = 0; col < matrix[row].length; col++) {
+      const value = matrix[row][col];
+
+      // 비어있는 셀은 렌더링하지 않음
+      if (value === 0) continue;
+
+      const x = (offsetX + col) * BLOCK_SIZE;
+      const y = (offsetY + row) * BLOCK_SIZE;
+
+      // matrix 값 그대로 색상 인덱스로 사용
+      drawCell(ctx, x, y, value);
+    }
+  }
+}
