@@ -70,6 +70,9 @@ function update(deltaTime) {
    테트로미노 렌더링
    =============================== */
 
+//현재 나타나 있는 테트로미노
+let currentTetromino;
+
 /**
  * 현재 테트로미노를 canvas에 그린다
  * @param {CanvasRenderingContext2D} ctx
