@@ -41,12 +41,13 @@ function drawCell(ctx, x, y, value) {
 function drawBoard(ctx) {
   const board = getBoard();
 
-  for (let row = 0; row < BOARD_ROWS; row++) {
+  // 숨겨진 상단 행은 렌더링하지 않음
+  for (let row = HIDDEN_ROWS; row < BOARD_ROWS; row++) {
     for (let col = 0; col < BOARD_COLS; col++) {
       const value = board[row][col];
 
       const x = col * BLOCK_SIZE;
-      const y = row * BLOCK_SIZE;
+      const y = (row - HIDDEN_ROWS) * BLOCK_SIZE;
 
       drawCell(ctx, x, y, value);
     }
