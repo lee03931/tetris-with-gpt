@@ -13,9 +13,14 @@
 // 가로 칸 수 (표준 테트리스: 10)
 const BOARD_COLS = 10;
 
-// 세로 칸 수 (표준 테트리스: 20)
-const BOARD_ROWS = 20;
+// 숨겨진 상단 세로 칸 수
+const HIDDEN_ROWS = 1;
 
+// 실제 게임 영역 세로 칸 수
+const VISIBLE_ROWS = 20;
+
+// 세로 칸 수 (표준 테트리스: 20)
+const BOARD_ROWS = VISIBLE_ROWS + HIDDEN_ROWS;
 
 /* ===============================
    블록(Block) 설정
