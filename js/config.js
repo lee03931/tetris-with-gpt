@@ -68,5 +68,5 @@ const COLORS = [
 const CANVAS_WIDTH = BOARD_COLS * BLOCK_SIZE;
 
 // canvas 세로 길이 = 블록 세로 수 * 블록 크기
-const CANVAS_HEIGHT = VISIBLE_ROWS * BLOCK_SIZE;
+const CANVAS_HEIGHT = BOARD_ROWS * BLOCK_SIZE;
 
