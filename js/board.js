@@ -17,7 +17,7 @@
  */
 function createBoard() {
   // BOARD_ROWS x BOARD_COLS 크기의 2D 배열 생성
-  return Array.from({ length: VISIBLE_ROWS }, () =>
+  return Array.from({ length: BOARD_ROWS }, () =>
     Array(BOARD_COLS).fill(0) // 0은 빈 칸
   );
 }
