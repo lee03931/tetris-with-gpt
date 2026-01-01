@@ -17,7 +17,7 @@
  */
 function createBoard() {
   // BOARD_ROWS x BOARD_COLS 크기의 2D 배열 생성
-  return Array.from({ length: BOARD_ROWS }, () =>
+  return Array.from({ length: VISIBLE_ROWS }, () =>
     Array(BOARD_COLS).fill(0) // 0은 빈 칸
   );
 }
@@ -56,8 +56,8 @@ function clearLines() {
   let linesCleared = 0;
 
   // 아래에서 위로 검사 (테트리스 표준 방식)
-  outer: for (let row = BOARD_ROWS - 1; row >= 0; row--) {
-    for (let col = 0; col < BOARD_COLS; col++) {
+  outer: for (let row = VISIBLE_ROWS - 1; row >= 0; row--) {
+    for (let col = 0; col < VISIBLE_ROWS; col++) {
       if (board[row][col] === 0) {
         // 빈 칸이 하나라도 있으면 이 줄은 제거 불가
         continue outer;
