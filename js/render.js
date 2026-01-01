@@ -71,8 +71,15 @@ function drawTetromino(ctx, tetromino) {
     for (let col = 0; col < matrix[row].length; col++) {
       if (matrix[row][col] === 0) continue;
 
-      const x = (offsetX + col) * BLOCK_SIZE;
-      const y = (offsetY + row) * BLOCK_SIZE;
+      const boardX = offsetX + col;
+      const boardY = offsetY + row;
+
+      // hidden row 영역이면 렌더링하지 않음
+      const screenY = boardY - HIDDEN_ROWS;
+      if (screenY < 0) continue;
+
+      const x = boardX * BLOCK_SIZE;
+      const y = screenY * BLOCK_SIZE;
 
       drawCell(ctx, x, y, value);
     }
@@ -98,8 +105,15 @@ function renderTetromino(ctx, tetromino) {
       // 비어있는 셀은 렌더링하지 않음
       if (value === 0) continue;
 
-      const x = (offsetX + col) * BLOCK_SIZE;
-      const y = (offsetY + row) * BLOCK_SIZE;
+      const boardX = offsetX + col;
+      const boardY = offsetY + row;
+
+      // hidden row 영역이면 렌더링하지 않음
+      const screenY = boardY - HIDDEN_ROWS;
+      if (screenY < 0) continue;
+
+      const x = boardX * BLOCK_SIZE;
+      const y = screenY * BLOCK_SIZE;
 
       // matrix 값 그대로 색상 인덱스로 사용
       drawCell(ctx, x, y, value);
