@@ -39,3 +39,4 @@ function tryMove(currentTetromino, dx, dy, board) {
   currentTetromino.y = nextY;
   return true;
 }
+ 
