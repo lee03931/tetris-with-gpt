@@ -18,7 +18,7 @@
  * @param {Array<Array<number>>} board - 게임 보드
  * @returns {boolean} 이동 성공 여부
  */
-function tryMove(currentTetromino, dx, dy, board) {
+function tryMove(dx, dy) {
   const nextX = currentTetromino.x + dx;
   const nextY = currentTetromino.y + dy;
 
