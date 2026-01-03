@@ -26,7 +26,7 @@ function tryMove(currentTetromino, dx, dy, board) {
   if (
     hasCollision(
       currentTetromino,
-      getoard(),
+      getboard(),
       nextX,
       nextY
     )
