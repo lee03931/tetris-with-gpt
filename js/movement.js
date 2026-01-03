@@ -25,8 +25,8 @@ function tryMove(currentTetromino, dx, dy, board) {
   // 충돌 발생 시 이동 불가
   if (
     hasCollision(
-      board,
-      currentTetromino.matrix,
+      currentTetromino,
+      getoard(),
       nextX,
       nextY
     )
