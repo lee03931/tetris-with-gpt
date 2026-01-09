@@ -49,25 +49,38 @@ function resetBoard() {
 
 /**
  * 현재 테트로미노를 보드에 고정한다.
- * @param {Object} tetromino - 고정할 테트로미노
+ * - currentTetromino는 절대 수정하지 않는다
+ * - board에 값만 복사한다
+ * - 충돌 판정은 여기서 하지 않는다
+ *
+ * @param {Object} currentTetromino
+ * @param {number[][]} board
  */
-function lockTetromino(tetromino) {
-  const { matrix, x, y } = tetromino;
+function lockTetromino(currentTetromino, board) {
+  const { matrix, x: baseX, y: baseY } = currentTetromino;
 
-  // 테트로미노의 모든 셀을 보드에 반영
   for (let row = 0; row < matrix.length; row++) {
     for (let col = 0; col < matrix[row].length; col++) {
+      const value = matrix[row][col];
+
       // 빈 칸은 무시
-      if (matrix[row][col] === 0) continue;
+      if (value === 0) continue;
 
-      const boardX = x + col;
-      const boardY = y + row;
+      const boardX = baseX + col;
+      const boardY = baseY + row;
 
-      // hidden row 위는 실제 보드에 고정하지 않음
-      if (boardY < HIDDEN_ROWS) continue;
+      // hidden row 위(y < 0)는 보드에 기록하지 않음
+      if (boardY < 0) continue;
 
-      // 보드에 블록 고정
-      board[boardY][boardX] = matrix[row][col];
+      // 보드 범위 안에 있을 때만 고정
+      if (
+        boardY >= 0 &&
+        boardY < BOARD_ROWS &&
+        boardX >= 0 &&
+        boardX < BOARD_COLS
+      ) {
+        board[boardY][boardX] = value;
+      }
     }
   }
 }
