@@ -31,13 +31,19 @@ function hasCollision(currentTetromino, board, offsetX = 0, offsetY = 0) {
       const newX = x + col + offsetX;
       const newY = y + row + offsetY;
 
-      // 보드 좌우 / 바닥 경계 충돌
-      if (
-        newX < 0 ||
-        newX >= BOARD_COLS ||
-        newY >= BOARD_ROWS
-      ) {
+      // 좌 / 우 경계 충돌
+      if (newX < 0 || newX >= BOARD_COLS) {
         return true;
+      }
+       
+       // 바닥 충돌
+      if (newY >= BOARD_ROWS) {
+        return true;
+      }
+
+       // hidden row 위는 충돌 검사 대상이 아님
+      if (newY < HIDDEN_ROWS) {
+        continue;
       }
 
       // 보드 내부 고정 블록 충돌
