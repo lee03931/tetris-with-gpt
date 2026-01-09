@@ -21,7 +21,7 @@
 function tryMove(currentTetromino, board, dx, dy) {
 
   // 충돌 발생 시 이동 불가
-  if (hasCollision(currentTetromino, board, nextX, nextY)) {
+  if (hasCollision(currentTetromino, board, dx, dy)) {
     return false;
   }
 
