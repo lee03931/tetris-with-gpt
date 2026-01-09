@@ -20,6 +20,11 @@
  */
 function tryMove(currentTetromino, board, dx, dy) {
 
+   // 위로 이동 금지 (버그 방지)
+  if (dy < 0) {
+    return false;
+  }
+   
   // 충돌 발생 시 이동 불가
   if (hasCollision(currentTetromino, board, dx, dy)) {
     return false;
