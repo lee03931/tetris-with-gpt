@@ -18,25 +18,16 @@
  * @param {Array<Array<number>>} board - 게임 보드
  * @returns {boolean} 이동 성공 여부
  */
-function tryMove(dx, dy) {
-  const nextX = currentTetromino.x + dx;
-  const nextY = currentTetromino.y + dy;
+function tryMove(currentTetromino, board, dx, dy) {
 
   // 충돌 발생 시 이동 불가
-  if (
-    hasCollision(
-      currentTetromino,
-      getBoard(),
-      nextX,
-      nextY
-    )
-  ) {
+  if (hasCollision(currentTetromino, board, nextX, nextY)) {
     return false;
   }
 
   // 이동 확정
-  currentTetromino.x = nextX;
-  currentTetromino.y = nextY;
+  currentTetromino.x += dx;
+  currentTetromino.y += dy;
   return true;
 }
  
