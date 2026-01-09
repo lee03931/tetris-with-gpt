@@ -43,6 +43,34 @@ function resetBoard() {
   board = createBoard();
 }
 
+/* ===============================
+   테트로미노 고정
+   =============================== */
+
+/**
+ * 현재 테트로미노를 보드에 고정한다.
+ * @param {Object} tetromino - 고정할 테트로미노
+ */
+function lockTetromino(tetromino) {
+  const { matrix, x, y } = tetromino;
+
+  // 테트로미노의 모든 셀을 보드에 반영
+  for (let row = 0; row < matrix.length; row++) {
+    for (let col = 0; col < matrix[row].length; col++) {
+      // 빈 칸은 무시
+      if (matrix[row][col] === 0) continue;
+
+      const boardX = x + col;
+      const boardY = y + row;
+
+      // hidden row 위는 실제 보드에 고정하지 않음
+      if (boardY < HIDDEN_ROWS) continue;
+
+      // 보드에 블록 고정
+      board[boardY][boardX] = matrix[row][col];
+    }
+  }
+}
 
 /* ===============================
    라인 제거 로직
