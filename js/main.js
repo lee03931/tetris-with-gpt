@@ -32,6 +32,12 @@ let lastTime = 0;
 // 누적 시간 (블록 낙하 등에 사용 예정)
 let dropCounter = 0;
 
+// 자동 낙하 간격 (ms)
+const DROP_INTERVAL = 1000;
+
+// lock delay 관련
+const LOCK_DELAY = 3000;
+let lockDelayStartTime = null;
 
 /* ===============================
    게임 초기화
@@ -65,10 +71,11 @@ function init() {
  * @param {number} deltaTime - 이전 프레임과의 시간 차(ms)
  */
 function update(deltaTime) {
-  // deltaTime: 이전 프레임과의 시간 차(ms)
+   dropCounter += deltaTime;
 
-  // 블록 자동 낙하 로직은 추후 추가
-  dropCounter += deltaTime;
+   if (dropCounter >= DROP_INTERVAL) {
+      tryMoveDown();
+      dropCounter = 0;
 }
 
 /* ===============================
