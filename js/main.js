@@ -53,8 +53,6 @@ function init() {
   requestAnimationFrame(gameLoop);
 }
 
-
-
 /* ===============================
    게임 상태 업데이트
    =============================== */
@@ -85,18 +83,16 @@ let currentTetromino = null;
 
 /**
  * 테트로미노를 한 칸 아래로 이동 시도한다.
- * - 이동 성공 시: lock delay 초기화
+ * - 이동 성공 시: 아무 것도 하지 않음
  * - 이동 실패 시: lock delay 시작 또는 검사
  */
 function tryMoveDown() {
-  // 아래로 이동 시도
+  // 아래 이동 시도
   if (tryMove(currentTetromino, 0, 1, getBoard())) {
-    // 이동 성공 → lock delay 리셋
-    lockDelayStartTime = null;
     return;
   }
 
-  // 아래 이동 실패 → 바닥 접촉 상태
+  // 바닥 접촉 상태 진입
   if (lockDelayStartTime === null) {
     lockDelayStartTime = performance.now();
     return;
@@ -107,8 +103,6 @@ function tryMoveDown() {
   if (elapsed >= LOCK_DELAY) {
     lockTetromino(currentTetromino, getBoard());
     clearLines();
-
-    // 새 테트로미노 스폰
     currentTetromino = createTetromino();
     lockDelayStartTime = null;
   }
