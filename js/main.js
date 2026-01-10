@@ -76,6 +76,7 @@ function update(deltaTime) {
    if (dropCounter >= DROP_INTERVAL) {
       tryMoveDown();
       dropCounter = 0;
+   }
 }
 
 /* ===============================
