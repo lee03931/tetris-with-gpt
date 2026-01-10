@@ -42,6 +42,10 @@ const BLOCK_BORDER_WIDTH = 1;
 // 값이 작을수록 블록이 빠르게 떨어짐
 const DROP_INTERVAL = 1000;
 
+// lock delay 관련
+const LOCK_DELAY = 3000;
+let lockDelayStartTime = null;
+
 
 /* ===============================
    색상(Color) 설정
