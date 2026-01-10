@@ -55,36 +55,26 @@ function drawBoard(ctx) {
 }
 
 /* ===============================
-   테트로미노 그리기
+   고정 블록 렌더링
    =============================== */
 
 /**
- * 현재 테트로미노를 canvas에 렌더링한다.
+ * 보드에 고정된 블록을 렌더링한다.
  * @param {CanvasRenderingContext2D} ctx
- * @param {Object} tetromino
+ * @param {number[][]} board
  */
-function drawTetromino(ctx, tetromino) {
-  const { matrix, x: offsetX, y: offsetY, value } = tetromino;
+export function drawFixedBlocks(ctx, board) {
+  for (let y = HIDDEN_ROWS; y < board.length; y++) {
+    for (let x = 0; x < board[y].length; x++) {
+      const cell = board[y][x];
 
-  // 테트로미노 행렬 순회
-  for (let row = 0; row < matrix.length; row++) {
-    for (let col = 0; col < matrix[row].length; col++) {
-      if (matrix[row][col] === 0) continue;
-
-      const boardX = offsetX + col;
-      const boardY = offsetY + row;
-
-      // hidden row 영역이면 렌더링하지 않음
-      const screenY = boardY - HIDDEN_ROWS;
-      if (screenY < 0) continue;
-
-      const x = boardX * BLOCK_SIZE;
-      const y = screenY * BLOCK_SIZE;
-
-      drawCell(ctx, x, y, value);
+      if (cell !== 0) {
+        drawCell(ctx, x, y - HIDDEN_ROWS, cell);
+      }
     }
   }
 }
+
 
 /* ===============================
    테트로미노 렌더링
