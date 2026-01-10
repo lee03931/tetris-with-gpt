@@ -88,7 +88,7 @@ let currentTetromino = null;
  */
 function tryMoveDown() {
   // 아래 이동 시도
-  if (tryMove(currentTetromino, 0, 1, getBoard())) {
+  if (tryMove(currentTetromino, getBoard(), 0, 1)) {
     return;
   }
 
